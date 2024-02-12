@@ -8,7 +8,7 @@ function App() {
     <div>
     <h2>Texte à recopier</h2>
       <p>
-        Pourquoi
+        Pourquoi le soleil est jaune ?
       </p>
       <UpdateText />
     </div>

@@ -1,34 +1,48 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-wordsToWrite = ['Pourquoi ', 'le ', 'soleil ', 'est ', 'jaune ', '? ']
-console.log(wordsToWrite)
+let wordsToWrite = ['Pourquoi ', 'le ', 'soleil ', 'est ', 'jaune ', '? '];
+let finalIndexWordsToWriteIndex = wordsToWrite.length;
+let wordsWritten = [];
+let i=0;
+
 
 function UpdateText() {
-    const [texteSaisi, setTexteSaisi] = useState('');
-    useEffect(() => {
-        // Cette fonction sera appelée après chaque mise à jour de texteSaisi
-        console.log("Valeur mise à jour :", texteSaisi);
 
-        // Ajoutez votre logique ici pour vérifier la nouvelle valeur
-        if (texteSaisi === "Pourquoi") {
-            console.log("C'est le bon mot");
-        }
-    }, [texteSaisi]); // Spécifiez la dépendance pour que useEffect soit appelé lorsqu'elle change
+    const [textWritten, setTextWritten] = useState('');
+    const [textToShow, setTextToShow] = useState('');
+    
+    
 
     function WordChecker(textPiece) {
-        setTexteSaisi(textPiece);
+        let wordToCheck=wordsToWrite[i];
+        setTextWritten(textPiece);
+        if (textPiece === wordToCheck) {
+            wordsWritten.push(wordToCheck);
+            i ++;
+            setTextToShow(textToShow + wordToCheck);
+            setTextWritten('')
+        }
+
+        if (i === finalIndexWordsToWriteIndex) {
+            setTextToShow('')
+        }
     }
 
     return (
         <div>
-            <label htmlFor="maBoiteTexte">Entrez du texte :</label>
-            <input
-                type="text"
-                id="maBoiteTexte"
-                name="maBoiteTexte"
-                value={texteSaisi}
-                onChange={(e) => WordChecker(e.target.value)}
-            />
+            <div>
+                <label htmlFor="maBoiteTexte">Entrez du texte :</label>
+                <input
+                    type="text"
+                    id="maBoiteTexte"
+                    name="maBoiteTexte"
+                    value={textWritten}
+                    onChange={(e) => WordChecker(e.target.value)}
+                />
+            </div>
+            <div>
+                <p>{textToShow}</p>
+        </div>
         </div>
     );
 }

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-let wordsToWrite = ['Pourquoi ', 'le ', 'soleil ', 'est ', 'jaune ', '? '];
-let finalIndexWordsToWriteIndex = wordsToWrite.length;
+let sentenceWords = ['Pourquoi ', 'le ', 'soleil ', 'est ', 'jaune ', '? ']; 
+let wordsToWrite = sentenceWords;
+let numberWords = sentenceWords.length;
 let wordsWritten = [];
 let i=0;
-
 
 function UpdateText() {
 
@@ -23,8 +23,9 @@ function UpdateText() {
             setTextWritten('')
         }
 
-        if (i === finalIndexWordsToWriteIndex) {
-            setTextToShow('')
+        if (i === numberWords) {
+            setTextToShow('');
+            i = 0;
         }
     }
 

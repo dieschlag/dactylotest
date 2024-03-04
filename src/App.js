@@ -1,5 +1,5 @@
 import './App.css';
-import UpdateText from './UserInputTreatment';
+import UpdateText from './UpdateText';
 
 
 function App() {

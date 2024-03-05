@@ -7,7 +7,7 @@
 */
 
 import { useState } from 'react';
-import raw from "./text.txt"
+// import raw from "./text.txt" [[unused]]
 
 let sentenceWords = ['Pourquoi ', 'le ', 'soleil ', 'est ', 'jaune ', '? ']; //original sentence to write
 let wordsToWrite = sentenceWords; // words that the user must write 

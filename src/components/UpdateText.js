@@ -12,10 +12,13 @@ import raw from "../assets/text.txt"
 let wordsToWrite = []; // words that the user must write 
 let wordsWritten = []; //words that the user has written
 let i=0; // index of the current word to write in wordsToWrite
+let textForApp = ""; // corresponds to the text that will be used to update the text in App.js
 
 fetch(raw)
 .then(r => r.text())
 .then(text => {
+
+textForApp = text;
 
 let lines=text.split("\n");
 
@@ -25,13 +28,12 @@ for (let ligne of lines) {
 
 for (let i=0; i<wordsToWrite.length-1; i++) {
     wordsToWrite[i] = wordsToWrite[i] + " ";
-} 
-
-console.log(wordsToWrite);
+}
 
 });
 
-let numberWords = wordsToWrite.length;
+console.log(wordsToWrite);
+
 
 
 
@@ -39,8 +41,9 @@ let numberWords = wordsToWrite.length;
 function UpdateText() {
 
     const [textWritten, setTextWritten] = useState(''); // texte currently written by the user
-    const [textToShow, setTextToShow] = useState(''); // text shown at the bottom of the input bar corresponding to the words correctly written
+    const [textOfProgress, setTextOfProgress] = useState(''); // text shown at the bottom of the input bar corresponding to the words correctly written
     const [inputColor, setInputColor] = useState('green'); //used to control the color of the input bar
+    //const [textToShow, setTextToShow] = useState(textForApp)
 
     function WordChecker(textPiece) {
 
@@ -48,12 +51,23 @@ function UpdateText() {
         - Checks if the word that is being written in the input corresponds to the word that should be written.
         - Updates the text displayed in the input bar
         - Resests everything when the entire line is written
-        */    
-        console.log(textPiece)
+        */ 
 
-        let wordToCheck=wordsToWrite[i]; //word that should be written by the user
+        let wordToCheck=wordsToWrite[i];  //word that should be written by the user
+        let numberWords = wordsToWrite.length
+        
+        console.log("function called")
+        console.log("index: " + i);
+        console.log(wordsToWrite);
+        console.log("1 " + wordToCheck);
         
         setTextWritten(textPiece);
+
+        if (i === numberWords) { //resets the text to write/written
+            setTextOfProgress(''); 
+            i = 0;
+        }
+        console.log("2 " + wordToCheck)
         
         if (textPiece === wordToCheck) {
             
@@ -62,31 +76,25 @@ function UpdateText() {
             i ++;
             
             //updates the text displayed + resets input bar color
-            setTextToShow(textToShow + wordToCheck);
+            setTextOfProgress(textOfProgress + wordToCheck);
             setTextWritten('')
             
-        }
-
-        if (i === numberWords) { //resets the text to write/written
-            setTextToShow(''); 
-            i = 0;
         }
         
         // Changes the color of the bar if an error is done while typing a word
         
         if (textPiece.length > wordToCheck.length) { //word too long
             setInputColor('red')
-            console.log("1")
+            
         }
         else {
             for (var j=0; j<textPiece.length; j++) { //checks for a typo 
                 if (textPiece !== '' && textPiece[j] !== wordToCheck[j]) {
                     setInputColor('red');
-                    console.log("2");
+                    
                 }
                 else if (textPiece === wordToCheck) {
                     setInputColor('gold');
-                    console.log("3");
                 }
                 else {
                     setInputColor("green");
@@ -97,6 +105,7 @@ function UpdateText() {
 
     return (
         <div>
+            <pre>{textForApp}</pre>
             <div>
                 <label htmlFor="maBoiteTexte">Entrez du texte : </label>
                 <input
@@ -112,7 +121,7 @@ function UpdateText() {
                 />
             </div>
             <div>
-                <p>{textToShow}</p>
+                <p>{textOfProgress}</p>
         </div>
         </div>
     );

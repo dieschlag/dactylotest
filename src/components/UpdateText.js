@@ -7,13 +7,31 @@
 */
 
 import { useState } from 'react';
-// import raw from "./text.txt" [[unused]]
+import raw from "../assets/text.txt"
 
-let sentenceWords = ['Pourquoi ', 'le ', 'soleil ', 'est ', 'jaune ', '? ']; //original sentence to write
-let wordsToWrite = sentenceWords; // words that the user must write 
-let numberWords = sentenceWords.length;
+let wordsToWrite = []; // words that the user must write 
 let wordsWritten = []; //words that the user has written
 let i=0; // index of the current word to write in wordsToWrite
+
+fetch(raw)
+.then(r => r.text())
+.then(text => {
+
+let lines=text.split("\n");
+
+for (let ligne of lines) {
+    wordsToWrite = wordsToWrite.concat(ligne.split(" "));
+}
+
+for (let i=0; i<wordsToWrite.length-1; i++) {
+    wordsToWrite[i] = wordsToWrite[i] + " ";
+} 
+
+console.log(wordsToWrite);
+
+});
+
+let numberWords = wordsToWrite.length;
 
 
 
@@ -23,29 +41,6 @@ function UpdateText() {
     const [textWritten, setTextWritten] = useState(''); // texte currently written by the user
     const [textToShow, setTextToShow] = useState(''); // text shown at the bottom of the input bar corresponding to the words correctly written
     const [inputColor, setInputColor] = useState('green'); //used to control the color of the input bar
-
-    // [Not used]
-    /*
-    let textSample = fetch(raw)
-    .then(r => r.text())
-    .then(text => {
-
-    let lines=text.split("\n");
-    console.log(lines)
-    
-    let listWords = [];
-    
-    for (let ligne of lines) {
-        console.log(ligne);
-        console.log(ligne.split(" "))
-        listWords = listWords.concat(ligne.split(" "));
-        console.log(listWords);
-    }
-    
-    console.log(listWords);
-    
-    });
-    */
 
     function WordChecker(textPiece) {
 

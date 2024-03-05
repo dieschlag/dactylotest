@@ -54,15 +54,13 @@ function UpdateText() {
         - Updates the text displayed in the input bar
         - Resests everything when the entire line is written
         */    
-
+        console.log(textPiece)
 
         let wordToCheck=wordsToWrite[i]; //word that should be written by the user
         
         setTextWritten(textPiece);
         
         if (textPiece === wordToCheck) {
-
-            setInputColor('#ffd700') // gold for success
             
             //switches to the next word
             wordsWritten.push(wordToCheck); 
@@ -71,7 +69,6 @@ function UpdateText() {
             //updates the text displayed + resets input bar color
             setTextToShow(textToShow + wordToCheck);
             setTextWritten('')
-            setInputColor('green')
             
         }
 
@@ -82,17 +79,22 @@ function UpdateText() {
         
         // Changes the color of the bar if an error is done while typing a word
         
-        if (textPiece.length > wordToCheck.length-1) { //word too long
+        if (textPiece.length > wordToCheck.length) { //word too long
             setInputColor('red')
+            console.log("1")
         }
         else {
             for (var j=0; j<textPiece.length; j++) { //checks for a typo 
-                if (textPiece[j] !== wordToCheck[j] && textPiece !== '') {
-                    console.log(textPiece[j] !== wordToCheck[j])
-                    setInputColor('red')
+                if (textPiece !== '' && textPiece[j] !== wordToCheck[j]) {
+                    setInputColor('red');
+                    console.log("2");
+                }
+                else if (textPiece === wordToCheck) {
+                    setInputColor('gold');
+                    console.log("3");
                 }
                 else {
-                    setInputColor('green')
+                    setInputColor("green");
                 }
             }
         }
@@ -108,7 +110,10 @@ function UpdateText() {
                     name="maBoiteTexte"
                     value={textWritten}
                     onChange={(e) => WordChecker(e.target.value)}
-                    style={{border: '2px solid ' + inputColor}}
+                    style={{
+                        border: '2px solid ' + inputColor,
+                        outline: "none"
+                    }}
                 />
             </div>
             <div>

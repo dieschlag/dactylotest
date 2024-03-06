@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import '../styles/App.css';
 import WordsToWrite from './WordsToWrite';
+import UpdateText from './UpdateText'
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
   return (
     <div>
       <WordsToWrite textToShow={textToShow} setTextToShow={setTextToShow} />
+      <UpdateText textToShow={textToShow}/>
     </div>
   );
 }

@@ -1,13 +1,20 @@
 import GenerateText from "./GenerateText"
 
-function WordsToWrite({wordsToWrite, setWordsToWrite}) {
+function WordsToWrite({textToShow, setTextToShow}) {
 
-    generatedWords = GenerateText()
-    setWordsToWrite(generatedWords)
+    console.log("WordsToWrite is rendered");
+
+    const fetchData = async () => {
+        let generatedWords = await GenerateText();
+        console.log(generatedWords);
+        setTextToShow(generatedWords);
+    }
+
+    fetchData()
     return(
         <div>
             <h2>Mots à écrire</h2>
-            <pre>{wordsToWrite}</pre>
+            <pre>{textToShow}</pre>
         </div>
     )
 

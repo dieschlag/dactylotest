@@ -5,7 +5,7 @@ import UpdateText from './UpdateText'
 
 function App() {
 
-  console.log("App is rendered")
+  //console.log("App is rendered")
   const [textToShow, setTextToShow] = useState("")
     
   return (

@@ -17,7 +17,7 @@ function SliceWords(text) {
             }
             //console.log("Le texte slicé est : ")
             //console.log(slicedText);
-            return(slicedText);
+            resolve(slicedText);
         } catch(error) {
             reject(error);
         }

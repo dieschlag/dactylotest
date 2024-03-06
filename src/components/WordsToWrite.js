@@ -2,8 +2,6 @@ import GenerateText from "./GenerateText"
 
 function WordsToWrite({textToShow, setTextToShow}) {
 
-    console.log("WordsToWrite is rendered");
-
     const fetchText = async () => {
         let generatedWords = await GenerateText();
         console.log(generatedWords);

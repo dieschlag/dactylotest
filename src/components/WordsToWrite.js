@@ -4,7 +4,7 @@ function WordsToWrite({textToShow, setTextToShow}) {
 
     console.log("WordsToWrite is rendered");
 
-    const fetchData = async () => {
+    const fetchText = async () => {
         let generatedWords = await GenerateText();
         console.log(generatedWords);
         setTextToShow(generatedWords);

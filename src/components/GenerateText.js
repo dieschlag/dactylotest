@@ -5,7 +5,7 @@ function GenerateText() {
         fetch(raw)
         .then(r => r.text())
         .then(text => {
-        console.log(text)
+        //console.log(text)
         return(text);
         })
     )

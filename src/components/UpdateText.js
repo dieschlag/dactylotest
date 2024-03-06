@@ -7,42 +7,35 @@
 */
 
 import { useState } from 'react';
-import raw from "../assets/text.txt"
-
-let wordsToWrite = []; // words that the user must write 
-let wordsWritten = []; //words that the user has written
+import SliceWords from './SliceWords';
+import { useEffect } from 'react';
+ 
+let wordsToWrite = [];
+let wordsWritten = []
 let i=0; // index of the current word to write in wordsToWrite
 let textForApp = ""; // corresponds to the text that will be used to update the text in App.js
 
-fetch(raw)
-.then(r => r.text())
-.then(text => {
-
-textForApp = text;
-
-let lines=text.split("\n");
-
-for (let ligne of lines) {
-    wordsToWrite = wordsToWrite.concat(ligne.split(" "));
-}
-
-for (let i=0; i<wordsToWrite.length-1; i++) {
-    wordsToWrite[i] = wordsToWrite[i] + " ";
-}
-
-});
-
-console.log(wordsToWrite);
-
-
-
-
-
-function UpdateText() {
+function UpdateText({textToShow}) {
 
     const [textWritten, setTextWritten] = useState(''); // texte currently written by the user
     const [textOfProgress, setTextOfProgress] = useState(''); // text shown at the bottom of the input bar corresponding to the words correctly written
     const [inputColor, setInputColor] = useState('green'); //used to control the color of the input bar
+    
+    useEffect((wordsToWrite) => {
+
+        const sliceText =  async () => {
+            console.log("executed")
+            await SliceWords(textToShow).then((value) => {
+                wordsToWrite = value;
+            });
+
+            console.log(wordsToWrite);
+        };
+
+        sliceText();
+
+    }, [textToShow])
+
     //const [textToShow, setTextToShow] = useState(textForApp)
 
     function WordChecker(textPiece) {
@@ -128,3 +121,4 @@ function UpdateText() {
 }
 
 export default UpdateText;
+

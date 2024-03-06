@@ -10,7 +10,7 @@ function WordsToWrite({textToShow, setTextToShow}) {
         setTextToShow(generatedWords);
     }
 
-    fetchData()
+    fetchText()
     return(
         <div>
             <h2>Mots à écrire</h2>

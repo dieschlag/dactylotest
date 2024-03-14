@@ -44,10 +44,16 @@ function UpdateText({textToShow}) {
         - Checks if the word that is being written in the input corresponds to the word that should be written.
         - Updates the text displayed in the input bar
         - Resests everything when the entire line is written
-        */ 
+        */
+
+        let numberWords = wordsToWrite.length
+
+        if (i === numberWords) { //
+            setTextOfProgress(''); 
+            i = 0;
+        }
 
         let wordToCheck = wordsToWrite[i];  //word that should be written by the user
-        let numberWords = wordsToWrite.length
         
         console.log("function called");
         console.log("index: " + i);
@@ -55,11 +61,6 @@ function UpdateText({textToShow}) {
         console.log("1 " + wordToCheck);
         
         setTextWritten(textPiece);
-
-        if (i === numberWords-1) { //resets the text to write/written
-            setTextOfProgress(''); 
-            i = 0;
-        }
         
         
         if (textPiece === wordToCheck) {

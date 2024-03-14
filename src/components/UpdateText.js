@@ -13,8 +13,9 @@ import { useEffect } from 'react';
 let i=0; // index of the current word to write in wordsToWrite
 let textForApp = ""; // corresponds to the text that will be used to update the text in App.js
 
-function UpdateText({textToShow}) {
-
+function UpdateText({textToShow, isEndLess}) {
+    console.log("isEndLess")
+    console.log(isEndLess)
     const [textWritten, setTextWritten] = useState(''); // texte currently written by the user
     const [textOfProgress, setTextOfProgress] = useState(''); // text shown at the bottom of the input bar corresponding to the words correctly written
     const [inputColor, setInputColor] = useState('green'); //used to control the color of the input bar
@@ -24,12 +25,12 @@ function UpdateText({textToShow}) {
     useEffect((wordsToWrite) => {
 
         const sliceText =  async () => {
-            console.log("executed")
+            //console.log("executed")
             await SliceWords(textToShow).then((value) => {
                 setWordstoWrite(value)
             });
 
-            console.log(wordsToWrite);
+            //console.log(wordsToWrite);
         };
 
         sliceText();
@@ -55,10 +56,10 @@ function UpdateText({textToShow}) {
 
         let wordToCheck = wordsToWrite[i];  //word that should be written by the user
         
-        console.log("function called");
-        console.log("index: " + i);
-        console.log(wordsToWrite);
-        console.log("1 " + wordToCheck);
+        // console.log("function called");
+        // console.log("index: " + i);
+        // console.log(wordsToWrite);
+        // console.log("1 " + wordToCheck);
         
         setTextWritten(textPiece);
         

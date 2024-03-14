@@ -9,13 +9,13 @@
 import { useState } from 'react';
 import SliceWords from './SliceWords';
 import { useEffect } from 'react';
- 
+import GenerateText from './GenerateText';
+
 let i=0; // index of the current word to write in wordsToWrite
 let textForApp = ""; // corresponds to the text that will be used to update the text in App.js
 
-function UpdateText({textToShow, isEndLess}) {
-    console.log("isEndLess")
-    console.log(isEndLess)
+function UpdateText({textToShow, isEndLess, setTextToShow}) {
+
     const [textWritten, setTextWritten] = useState(''); // texte currently written by the user
     const [textOfProgress, setTextOfProgress] = useState(''); // text shown at the bottom of the input bar corresponding to the words correctly written
     const [inputColor, setInputColor] = useState('green'); //used to control the color of the input bar
@@ -49,32 +49,16 @@ function UpdateText({textToShow, isEndLess}) {
 
         let numberWords = wordsToWrite.length
 
-        if (i === numberWords) { //
-            setTextOfProgress(''); 
-            i = 0;
-        }
+        //console.log("index: " + i);
 
         let wordToCheck = wordsToWrite[i];  //word that should be written by the user
         
         // console.log("function called");
-        // console.log("index: " + i);
+        
         // console.log(wordsToWrite);
         // console.log("1 " + wordToCheck);
         
         setTextWritten(textPiece);
-        
-        
-        if (textPiece === wordToCheck) {
-            
-            //switches to the next word
-            setWordsWritten([...wordsWritten, wordToCheck]);
-            i ++;
-            
-            //updates the text displayed + resets input bar color
-            setTextOfProgress(textOfProgress + wordToCheck);
-            setTextWritten('')
-            
-        }
         
         // Changes the color of the bar if an error is done while typing a word
         
@@ -82,19 +66,49 @@ function UpdateText({textToShow, isEndLess}) {
             setInputColor('red')
             
         }
-        else {
-            for (var j=0; j<textPiece.length; j++) { //checks for a typo 
+        else if (textPiece.length <= wordToCheck.length) {
+            
+            for (var j=0; j<textPiece.length; j++) { //checks for a typo
+                console.log("j:" + j)
+                console.log("textPiece.length:" + textPiece.length)
                 if (textPiece !== '' && textPiece[j] !== wordToCheck[j]) {
                     setInputColor('red');
                     
-                }
-                else if (textPiece === wordToCheck) {
-                    setInputColor('gold');
-                }
-                else {
+                } else {
                     setInputColor("green");
                 }
             }
+
+            if (textPiece === wordToCheck) {
+                console.log("textPiece:" + textPiece)
+                console.log("wordToCheck:" + wordToCheck)
+                setInputColor('gold');
+                console.log("avant incr:" + i)
+                //switches to the next word
+                setWordsWritten([...wordsWritten, wordToCheck]);
+                i ++;
+                
+                console.log("après incr" + i)
+
+                //updates the text displayed + resets input bar color
+                setTextOfProgress(textOfProgress + wordToCheck);
+                setTextWritten('')
+
+                if (i === numberWords) { //
+                    setTextOfProgress(''); 
+                    i = 0;
+                    console.log("reset:" + i)
+                    if (isEndLess) {
+                        const fetchText = async () => {
+                            let generatedWords = await GenerateText();
+                            //console.log(generatedWords);
+                            setTextToShow(generatedWords);
+                        }
+                        fetchText();
+                    }
+                }
+            }
+            
         }
     }
 

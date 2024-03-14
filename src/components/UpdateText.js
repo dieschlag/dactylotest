@@ -10,8 +10,6 @@ import { useState } from 'react';
 import SliceWords from './SliceWords';
 import { useEffect } from 'react';
  
-let wordsToWrite = [];
-let wordsWritten = []
 let i=0; // index of the current word to write in wordsToWrite
 let textForApp = ""; // corresponds to the text that will be used to update the text in App.js
 
@@ -20,13 +18,15 @@ function UpdateText({textToShow}) {
     const [textWritten, setTextWritten] = useState(''); // texte currently written by the user
     const [textOfProgress, setTextOfProgress] = useState(''); // text shown at the bottom of the input bar corresponding to the words correctly written
     const [inputColor, setInputColor] = useState('green'); //used to control the color of the input bar
+    const [wordsToWrite, setWordstoWrite] = useState(''); // list of words that the user must still write
+    const [wordsWritten, setWordsWritten] = useState(''); // list of words that the user has already written
     
     useEffect((wordsToWrite) => {
 
         const sliceText =  async () => {
             console.log("executed")
             await SliceWords(textToShow).then((value) => {
-                wordsToWrite = value;
+                setWordstoWrite(value)
             });
 
             console.log(wordsToWrite);
@@ -46,26 +46,26 @@ function UpdateText({textToShow}) {
         - Resests everything when the entire line is written
         */ 
 
-        let wordToCheck=wordsToWrite[i];  //word that should be written by the user
+        let wordToCheck = wordsToWrite[i];  //word that should be written by the user
         let numberWords = wordsToWrite.length
         
-        console.log("function called")
+        console.log("function called");
         console.log("index: " + i);
         console.log(wordsToWrite);
         console.log("1 " + wordToCheck);
         
         setTextWritten(textPiece);
 
-        if (i === numberWords) { //resets the text to write/written
+        if (i === numberWords-1) { //resets the text to write/written
             setTextOfProgress(''); 
             i = 0;
         }
-        console.log("2 " + wordToCheck)
+        
         
         if (textPiece === wordToCheck) {
             
             //switches to the next word
-            wordsWritten.push(wordToCheck); 
+            setWordsWritten([...wordsWritten, wordToCheck]);
             i ++;
             
             //updates the text displayed + resets input bar color

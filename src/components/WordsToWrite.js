@@ -3,7 +3,6 @@ import {useEffect} from 'react'
 
 function WordsToWrite({textToShow, setTextToShow}) {
 
-    console.log("bonjour")
 
     useEffect(() => {
         const fetchText = async () => {

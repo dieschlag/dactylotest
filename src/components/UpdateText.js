@@ -66,7 +66,7 @@ function UpdateText({textToShow, isEndLess, setTextToShow}) {
             setInputColor('red')
             
         }
-        else if (textPiece.length <= wordToCheck.length) {
+        else {
             
             for (var j=0; j<textPiece.length; j++) { //checks for a typo
                 console.log("j:" + j)

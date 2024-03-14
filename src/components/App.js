@@ -18,7 +18,7 @@ function App() {
   const dactylo = (
     <div>
       <WordsToWrite textToShow={textToShow} setTextToShow={setTextToShow} />
-      <UpdateText textToShow={textToShow} isEndLess={isEndLess}/>
+      <UpdateText textToShow={textToShow} isEndLess={isEndLess} setTextToShow={setTextToShow}/>
     </div>
   );
 

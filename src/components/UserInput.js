@@ -10,17 +10,27 @@ import { useState } from 'react';
 import SliceWords from './SliceWords';
 import { useEffect } from 'react';
 import GenerateText from './GenerateText';
+import BottomInput from './BottomInput';
 
 let i=0; // index of the current word to write in wordsToWrite
 let textForApp = ""; // corresponds to the text that will be used to update the text in App.js
 
-function UpdateText({textToShow, isEndLess, setTextToShow}) {
+function UserInput({
+    textToShow,     
+    isEndLess,
+    setTextToShow,
+    textWritten,
+    setTextWritten,
+    isFinished,
+    setIsFinished
+    }) {
 
-    const [textWritten, setTextWritten] = useState(''); // texte currently written by the user
+    
     const [textOfProgress, setTextOfProgress] = useState(''); // text shown at the bottom of the input bar corresponding to the words correctly written
     const [inputColor, setInputColor] = useState('green'); //used to control the color of the input bar
     const [wordsToWrite, setWordstoWrite] = useState(''); // list of words that the user must still write
     const [wordsWritten, setWordsWritten] = useState(''); // list of words that the user has already written
+    
     
     useEffect((wordsToWrite) => {
 
@@ -115,7 +125,6 @@ function UpdateText({textToShow, isEndLess, setTextToShow}) {
     return (
         <div>
             <pre>{textForApp}</pre>
-            <div>
                 <label htmlFor="maBoiteTexte">Entrez du texte : </label>
                 <input
                     type="text"
@@ -128,13 +137,9 @@ function UpdateText({textToShow, isEndLess, setTextToShow}) {
                         outline: "none"
                     }}
                 />
-            </div>
-            <div>
-                <p>{textOfProgress}</p>
-        </div>
         </div>
     );
 }
 
-export default UpdateText;
+export default UserInput;
 

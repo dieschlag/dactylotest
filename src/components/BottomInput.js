@@ -1,20 +1,38 @@
-import ChangeMode from "./ChangeMode"
+import ChangeModeAndReset from "./ChangeModeAndReset"
 import Progress from "./Progress"
 import EndNormalButtons from "./EndNormalButtons"
 
-function BottomInput ({textWritten, isEndLess, isFinished, setTextToShow}) {
-    endNormalMode = (
+function BottomInput ({textProgress, setTextProgress, isEndLess, setIsEndLess, isFinished, setIsFinished, setTextToShow}) {
+    const endNormalMode = (
         <div>
-            <EndNormalButtons />
-            <ChangeMode />
+            <EndNormalButtons setTextToShow={setTextToShow} setTextProgress={setTextProgress} setIsFinished={setIsFinished}/>
+            
+            <ChangeModeAndReset 
+                isEndLess={isEndLess} 
+                setIsEndLess={setIsEndLess} 
+                setTextToShow={setTextToShow} 
+                setTextProgress={setTextProgress}
+                setIsFinished={setIsFinished} 
+            />
         </div>
     )
-    onGoingDisplay = (
+    const onGoingDisplay = (
         <div>
-            <Progress />
-            <ChangeMode />
+            <ChangeModeAndReset 
+                isEndLess={isEndLess} 
+                setIsEndLess={setIsEndLess} 
+                setTextToShow={setTextToShow}
+                setTextProgress={setTextProgress} 
+                setIsFinished={setIsFinished}
+            />
         </div>
-    ) 
+    )
+    return (
+        <div>
+            <Progress textProgress={textProgress} />
+            {isFinished ? endNormalMode : onGoingDisplay}
+        </div>
+    )
 }
 
 export default BottomInput

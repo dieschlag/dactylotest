@@ -98,7 +98,7 @@ function UserInput({
                     chronoEnd = performance.now()
                     let timeToWrite = chronoEnd - chronoBegin
                     setWordsPerMinute((numberWords/timeToWrite) * 1000)
-                    console.log(((numberWords/timeToWrite) * 1000)*60)
+                    
                     i = 0;
                     if (isEndLess) {
                         console.log("erreur")

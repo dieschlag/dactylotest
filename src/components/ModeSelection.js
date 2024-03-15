@@ -1,6 +1,3 @@
-import WordsToWrite from "./WordsToWrite";
-import UpdateText from "./UpdateText";
-
 function ModeSelection({isModeChosen, setisModeChosen, isEndLess, setIsEndLess }) {
     return(
         <div>

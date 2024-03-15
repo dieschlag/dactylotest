@@ -11,8 +11,9 @@ function WordsToWrite({textToShow, setTextToShow}) {
             setTextToShow(generatedWords);
         }
         fetchText();
-    }, []
-    )
+        
+    }, [])
+
     return(
         <div>
             <h2>Mots à écrire</h2>

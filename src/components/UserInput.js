@@ -14,30 +14,32 @@ import GenerateText from './GenerateText';
 let i=0; // index of the current word to write in wordsToWrite
 let textForApp = ""; // corresponds to the text that will be used to update the text in App.js
 
-function UpdateText({textToShow, isEndLess, setTextToShow}) {
+function UserInput({
+    textToShow,     
+    isEndLess,
+    setTextToShow,
+    textProgress,
+    setTextProgress,
+    setIsFinished
+    }) {
 
-    const [textWritten, setTextWritten] = useState(''); // texte currently written by the user
-    const [textOfProgress, setTextOfProgress] = useState(''); // text shown at the bottom of the input bar corresponding to the words correctly written
+    
     const [inputColor, setInputColor] = useState('green'); //used to control the color of the input bar
     const [wordsToWrite, setWordstoWrite] = useState(''); // list of words that the user must still write
-    const [wordsWritten, setWordsWritten] = useState(''); // list of words that the user has already written
+    const [textWritten, setTextWritten] = useState(''); // texte currently written by the user
+    
     
     useEffect((wordsToWrite) => {
 
         const sliceText =  async () => {
-            //console.log("executed")
             await SliceWords(textToShow).then((value) => {
                 setWordstoWrite(value)
             });
-
-            //console.log(wordsToWrite);
         };
 
         sliceText();
 
     }, [textToShow])
-
-    //const [textToShow, setTextToShow] = useState(textForApp)
 
     function WordChecker(textPiece) {
 
@@ -49,14 +51,7 @@ function UpdateText({textToShow, isEndLess, setTextToShow}) {
 
         let numberWords = wordsToWrite.length
 
-        //console.log("index: " + i);
-
         let wordToCheck = wordsToWrite[i];  //word that should be written by the user
-        
-        // console.log("function called");
-        
-        // console.log(wordsToWrite);
-        // console.log("1 " + wordToCheck);
         
         setTextWritten(textPiece);
         
@@ -69,8 +64,6 @@ function UpdateText({textToShow, isEndLess, setTextToShow}) {
         else {
             
             for (var j=0; j<textPiece.length; j++) { //checks for a typo
-                console.log("j:" + j)
-                console.log("textPiece.length:" + textPiece.length)
                 if (textPiece !== '' && textPiece[j] !== wordToCheck[j]) {
                     setInputColor('red');
                     
@@ -80,33 +73,37 @@ function UpdateText({textToShow, isEndLess, setTextToShow}) {
             }
 
             if (textPiece === wordToCheck) {
-                console.log("textPiece:" + textPiece)
-                console.log("wordToCheck:" + wordToCheck)
+
                 setInputColor('gold');
-                console.log("avant incr:" + i)
                 //switches to the next word
-                setWordsWritten([...wordsWritten, wordToCheck]);
                 i ++;
                 
-                console.log("après incr" + i)
-
-                //updates the text displayed + resets input bar color
-                setTextOfProgress(textOfProgress + wordToCheck);
-                setTextWritten('')
+                setTextProgress(prevTextProgress => prevTextProgress + wordToCheck)
+                
 
                 if (i === numberWords) { //
-                    setTextOfProgress(''); 
+
+                    //the end of the sentence is reached
+                    
+
+                    
                     i = 0;
-                    console.log("reset:" + i)
                     if (isEndLess) {
+                        console.log("erreur")
                         const fetchText = async () => {
                             let generatedWords = await GenerateText();
-                            //console.log(generatedWords);
                             setTextToShow(generatedWords);
                         }
                         fetchText();
+                            setTextProgress('');
+                    } else {
+                        console.log("isok")
+                        setIsFinished(true);
                     }
+
+                
                 }
+            setTextWritten('') 
             }
             
         }
@@ -115,7 +112,6 @@ function UpdateText({textToShow, isEndLess, setTextToShow}) {
     return (
         <div>
             <pre>{textForApp}</pre>
-            <div>
                 <label htmlFor="maBoiteTexte">Entrez du texte : </label>
                 <input
                     type="text"
@@ -128,13 +124,9 @@ function UpdateText({textToShow, isEndLess, setTextToShow}) {
                         outline: "none"
                     }}
                 />
-            </div>
-            <div>
-                <p>{textOfProgress}</p>
-        </div>
         </div>
     );
 }
 
-export default UpdateText;
+export default UserInput;
 

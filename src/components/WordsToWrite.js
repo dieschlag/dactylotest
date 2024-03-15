@@ -11,8 +11,8 @@ function WordsToWrite({textToShow, setTextToShow}) {
             setTextToShow(generatedWords);
         }
         fetchText();
-        console.log("bbonjour");
-    }, 1)
+        
+    }, [])
 
     return(
         <div>

@@ -13,6 +13,7 @@ function App() {
   const [isEndLess, setIsEndLess] = useState(false)
   const [isFinished, setIsFinished] = useState(false) // condition to know if the user has finished to write the generated text
   const [textProgress, setTextProgress] = useState(''); // text shown at the bottom of the input bar corresponding to the words correctly written
+  const [wordsPerMinute, setWordsPerMinute] = useState(0);
   
   const modeSelection = (
     <ModeSelection 
@@ -31,7 +32,9 @@ function App() {
         setTextToShow={setTextToShow}
         textProgress={textProgress}
         setTextProgress={setTextProgress}
-        setIsFinished={setIsFinished} 
+        setIsFinished={setIsFinished}
+        wordsPerMinute={wordsPerMinute}
+        setWordsPerMinute={setWordsPerMinute}
       />
       <BottomInput  
         textProgress={textProgress}

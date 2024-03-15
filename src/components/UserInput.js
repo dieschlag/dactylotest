@@ -22,7 +22,8 @@ function UserInput({
     setTextToShow,
     textProgress,
     setTextProgress,
-    setIsFinished
+    setIsFinished,
+    setWordsPerMinute
     }) {
 
     
@@ -95,7 +96,9 @@ function UserInput({
                     //the end of the sentence is reached
                     
                     chronoEnd = performance.now()
-                    console.log(chronoEnd - chronoBegin)
+                    let timeToWrite = chronoEnd - chronoBegin
+                    setWordsPerMinute((numberWords/timeToWrite) * 1000)
+                    console.log(((numberWords/timeToWrite) * 1000)*60)
                     i = 0;
                     if (isEndLess) {
                         console.log("erreur")

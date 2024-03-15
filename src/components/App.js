@@ -44,6 +44,7 @@ function App() {
         isFinished={isFinished} 
         setTextToShow={setTextToShow} 
         setIsFinished={setIsFinished}
+        wordsPerMinute={wordsPerMinute}
       />
     </div>
   );

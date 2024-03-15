@@ -1,7 +1,7 @@
 import GenerateText from "./GenerateText"
 import {useEffect} from 'react'
 
-function WordsToWrite({textToShow, setTextToShow}) {
+function WordsToWrite({textToShow, setTextToShow, textOfProgress}) {
 
 
     useEffect(() => {
@@ -16,7 +16,7 @@ function WordsToWrite({textToShow, setTextToShow}) {
     return(
         <div>
             <h2>Mots à écrire</h2>
-            <pre>{textToShow}</pre>
+            <span style={{color : "green"}}>{textOfProgress}</span><span>{textToShow}</span>
         </div>
     )
 

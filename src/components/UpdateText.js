@@ -11,17 +11,19 @@ import SliceWords from './SliceWords';
 import { useEffect } from 'react';
 import GenerateText from './GenerateText';
 
+
 let i=0; // index of the current word to write in wordsToWrite
 let textForApp = ""; // corresponds to the text that will be used to update the text in App.js
 
-function UpdateText({textToShow, isEndLess, setTextToShow}) {
+function UpdateText({textToShow, isEndLess, setTextToShow, textOfProgress, setTextOfProgress,textLeftToWrite, setTextLeftToWrite}) {
 
     const [textWritten, setTextWritten] = useState(''); // texte currently written by the user
-    const [textOfProgress, setTextOfProgress] = useState(''); // text shown at the bottom of the input bar corresponding to the words correctly written
     const [inputColor, setInputColor] = useState('green'); //used to control the color of the input bar
     const [wordsToWrite, setWordstoWrite] = useState(''); // list of words that the user must still write
     const [wordsWritten, setWordsWritten] = useState(''); // list of words that the user has already written
     
+
+
     useEffect((wordsToWrite) => {
 
         const sliceText =  async () => {
@@ -51,7 +53,7 @@ function UpdateText({textToShow, isEndLess, setTextToShow}) {
 
         //console.log("index: " + i);
 
-        let wordToCheck = wordsToWrite[i];  //word that should be written by the user
+        let wordToCheck = wordsToWrite[0];  //word that should be written by the user
         
         // console.log("function called");
         
@@ -80,12 +82,16 @@ function UpdateText({textToShow, isEndLess, setTextToShow}) {
             }
 
             if (textPiece === wordToCheck) {
+                setTextToShow('');
                 console.log("textPiece:" + textPiece)
                 console.log("wordToCheck:" + wordToCheck)
                 setInputColor('gold');
                 console.log("avant incr:" + i)
                 //switches to the next word
                 setWordsWritten([...wordsWritten, wordToCheck]);
+                wordsToWrite.shift();
+                console.log(wordsToWrite)
+                for (let word in wordsToWrite){setTextToShow(textToShow + word)}
                 i ++;
                 
                 console.log("après incr" + i)
@@ -94,7 +100,7 @@ function UpdateText({textToShow, isEndLess, setTextToShow}) {
                 setTextOfProgress(textOfProgress + wordToCheck);
                 setTextWritten('')
 
-                if (i === numberWords) { //
+                if (wordsToWrite.length === 0) { //
                     setTextOfProgress(''); 
                     i = 0;
                     console.log("reset:" + i)
@@ -135,6 +141,8 @@ function UpdateText({textToShow, isEndLess, setTextToShow}) {
         </div>
     );
 }
+
+
 
 export default UpdateText;
 

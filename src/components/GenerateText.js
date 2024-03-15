@@ -5,7 +5,7 @@ function GenerateText() {
     console.log(filePath);
 
     const context = require.context('../assets', true);
-    const raw = context(`./text${randomNumber}.txt`);
+    const raw = context(`./text1.txt`);
     
     return(
         fetch(raw)

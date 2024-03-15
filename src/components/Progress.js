@@ -1,7 +1,10 @@
-function Progress({ textWritten }) {
+function Progress({ textProgress }) {
+    console.log(textProgress)
     return(
-        <p>{textWritten}</p>
+        <div>
+            <p>{textProgress}</p>
+        </div>
     )
 }
 
-export default TextWritten
+export default Progress

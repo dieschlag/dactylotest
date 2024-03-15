@@ -1,6 +1,6 @@
 import GenerateText from "./GenerateText";
 
-function EndNormalButtons({setTextToShow, setTextProgress, setIsFinished}) {
+function EndNormalButtons({textToShow, setTextToShow, setTextProgress, setIsFinished, setTextLeft}) {
     return (
         <div>
             <input
@@ -11,6 +11,7 @@ function EndNormalButtons({setTextToShow, setTextProgress, setIsFinished}) {
                     let generatedWords = await GenerateText();
                     //console.log(generatedWords);
                     setTextToShow(generatedWords);
+                    setTextLeft(generatedWords);
                 }
                 fetchText();
                 setTextProgress('');
@@ -22,6 +23,7 @@ function EndNormalButtons({setTextToShow, setTextProgress, setIsFinished}) {
             value ="Try again"
             onClick = {()=> {
                 setTextProgress('');
+                setTextLeft(textToShow);
                 setIsFinished(false);
             }}
             />

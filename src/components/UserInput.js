@@ -20,7 +20,10 @@ function UserInput({
     setTextToShow,
     textProgress,
     setTextProgress,
-    setIsFinished
+    isFinished,
+    setIsFinished,
+    textLeft,
+    setTextLeft
     }) {
 
     
@@ -51,7 +54,7 @@ function UserInput({
 
         let numberWords = wordsToWrite.length
 
-        let wordToCheck = wordsToWrite[i];  //word that should be written by the user
+        let wordToCheck = wordsToWrite[0];  //word that should be written by the user
         
         setTextWritten(textPiece);
         
@@ -74,14 +77,21 @@ function UserInput({
 
             if (textPiece === wordToCheck) {
 
+                setTextLeft('');
+
                 setInputColor('gold');
                 //switches to the next word
                 i ++;
                 
                 setTextProgress(prevTextProgress => prevTextProgress + wordToCheck)
-                
+                wordsToWrite.shift();
 
-                if (i === numberWords) { //
+                for(let mot of wordsToWrite){
+                    setTextLeft(prevTextLeft => prevTextLeft+mot)
+
+                }
+
+                if (wordsToWrite.length === 0) { //
 
                     //the end of the sentence is reached
                     
@@ -93,6 +103,7 @@ function UserInput({
                         const fetchText = async () => {
                             let generatedWords = await GenerateText();
                             setTextToShow(generatedWords);
+                            setTextLeft(generatedWords);
                         }
                         fetchText();
                             setTextProgress('');
@@ -118,7 +129,7 @@ function UserInput({
                     id="maBoiteTexte"
                     name="maBoiteTexte"
                     value={textWritten}
-                    onChange={(e) => WordChecker(e.target.value)}
+                    onChange={(e) => {if(isFinished === false){WordChecker(e.target.value)}}}
                     style={{
                         border: '2px solid ' + inputColor,
                         outline: "none"

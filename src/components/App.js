@@ -13,7 +13,9 @@ function App() {
   const [isEndLess, setIsEndLess] = useState(false)
   const [isFinished, setIsFinished] = useState(false) // condition to know if the user has finished to write the generated text
   const [textProgress, setTextProgress] = useState(''); // text shown at the bottom of the input bar corresponding to the words correctly written
-  
+  const[textLeft, setTextLeft] = useState('');
+
+
   const modeSelection = (
     <ModeSelection 
       isModeChosen={isModeChosen} 
@@ -25,13 +27,16 @@ function App() {
 
   const dactylo = (
     <div>
-      <WordsToWrite textToShow={textToShow} setTextToShow={setTextToShow} />
+      <WordsToWrite textToShow={textToShow} setTextToShow={setTextToShow} textProgress={textProgress} textLeft = {textLeft} setTextLeft={setTextLeft}/>
       <UserInput textToShow={textToShow} 
         isEndLess={isEndLess} 
         setTextToShow={setTextToShow}
         textProgress={textProgress}
         setTextProgress={setTextProgress}
+        isFinished={isFinished}
         setIsFinished={setIsFinished} 
+        textLeft = {textLeft}
+        setTextLeft={setTextLeft}
       />
       <BottomInput  
         textProgress={textProgress}
@@ -41,6 +46,7 @@ function App() {
         isFinished={isFinished} 
         setTextToShow={setTextToShow} 
         setIsFinished={setIsFinished}
+        setTextLeft={setTextLeft}
       />
     </div>
   );

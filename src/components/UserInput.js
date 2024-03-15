@@ -13,6 +13,8 @@ import GenerateText from './GenerateText';
 
 let i=0; // index of the current word to write in wordsToWrite
 let textForApp = ""; // corresponds to the text that will be used to update the text in App.js
+let chronoBegin = null;
+let chronoEnd = null;
 
 function UserInput({
     textToShow,     
@@ -27,6 +29,7 @@ function UserInput({
     const [inputColor, setInputColor] = useState('green'); //used to control the color of the input bar
     const [wordsToWrite, setWordstoWrite] = useState(''); // list of words that the user must still write
     const [textWritten, setTextWritten] = useState(''); // texte currently written by the user
+    const [isFirstInput, setIsFirstInput] = useState(true);
     
     
     useEffect((wordsToWrite) => {
@@ -48,6 +51,12 @@ function UserInput({
         - Updates the text displayed in the input bar
         - Resests everything when the entire line is written
         */
+
+        if (isFirstInput) {
+            setIsFirstInput(false);
+            chronoBegin = performance.now();
+            console.log(chronoBegin);
+        }
 
         let numberWords = wordsToWrite.length
 
@@ -85,8 +94,8 @@ function UserInput({
 
                     //the end of the sentence is reached
                     
-
-                    
+                    chronoEnd = performance.now()
+                    console.log(chronoEnd - chronoBegin)
                     i = 0;
                     if (isEndLess) {
                         console.log("erreur")
@@ -100,8 +109,7 @@ function UserInput({
                         console.log("isok")
                         setIsFinished(true);
                     }
-
-                
+                setIsFirstInput(true)
                 }
             setTextWritten('') 
             }

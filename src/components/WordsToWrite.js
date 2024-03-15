@@ -1,7 +1,7 @@
 import GenerateText from "./GenerateText"
 import {useEffect} from 'react'
 
-function WordsToWrite({textToShow, setTextToShow, textOfProgress}) {
+function WordsToWrite({textToShow, setTextToShow, textOfProgress, textLeftToWrite,setTextLeftToWrite}) {
 
 
     useEffect(() => {

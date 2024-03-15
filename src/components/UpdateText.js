@@ -58,7 +58,7 @@ function UpdateText({textToShow, isEndLess, setTextToShow, textOfProgress, setTe
         // console.log("function called");
         
         // console.log(wordsToWrite);
-        // console.log("1 " + wordToCheck);
+        console.log("1 " + wordToCheck);
         
         setTextWritten(textPiece);
         

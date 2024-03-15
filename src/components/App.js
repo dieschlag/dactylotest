@@ -19,7 +19,7 @@ function App() {
 
   const dactylo = (
     <div>
-      <WordsToWrite textToShow={textToShow} setTextToShow={setTextToShow} textOfProgress = {textOfProgress} />
+      <WordsToWrite textToShow={textToShow} setTextToShow={setTextToShow} textOfProgress = {textOfProgress} textLeftToWrite={textLeftToWrite} setTextLeftToWrite={setTextLeftToWrite}/>
       <UpdateText textToShow={textToShow} isEndLess={isEndLess} setTextToShow={setTextToShow} textOfProgress={textOfProgress} setTextOfProgress={setTextOfProgress} textLeftToWrite={textLeftToWrite} setTextLeftToWrite={setTextLeftToWrite} />
     </div>
   );

@@ -8,8 +8,6 @@ function ModeSelection({isModeChosen, setisModeChosen, isEndLess, setIsEndLess, 
                 onClick = {() => {
                     setisModeChosen(true);
                     setMode("normal");
-                    console.log("here");
-                    console.log(mode);
                 }}
                 
             />
@@ -22,8 +20,7 @@ function ModeSelection({isModeChosen, setisModeChosen, isEndLess, setIsEndLess, 
                     setisModeChosen(true);
                     setIsEndLess(true);
                     setMode("endless");
-                    console.log("here");
-                    console.log(mode);
+
                 }}
             />
         </div>

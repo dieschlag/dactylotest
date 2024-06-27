@@ -10,7 +10,7 @@ function App() {
 
   //console.log("App is rendered")
   const [textToShow, setTextToShow] = useState("");
-  const [mode, setMode] = useState("")
+  const [mode, setMode] = useState("");
   const [isModeChosen, setIsModeChosen] = useState(false);
   const [isEndLess, setIsEndLess] = useState(false)
   const [isFinished, setIsFinished] = useState(false) // condition to know if the user has finished to write the generated text
@@ -29,7 +29,7 @@ function App() {
 
   const dactylo = (
     <div>
-      <ModeDisplay />
+      <ModeDisplay mode={mode}/>
       <WordsToWrite textToShow={textToShow} setTextToShow={setTextToShow} />
       <UserInput textToShow={textToShow} 
         isEndLess={isEndLess} 

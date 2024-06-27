@@ -46,7 +46,7 @@ function App() {
         isFinished={isFinished} 
         setTextToShow={setTextToShow} 
         setIsFinished={setIsFinished}
-        mode={mode}
+        setMode={setMode}
       />
     </div>
   );

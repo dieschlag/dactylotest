@@ -2,7 +2,7 @@ import ChangeModeAndReset from "./ChangeModeAndReset"
 import Progress from "./Progress"
 import EndNormalButtons from "./EndNormalButtons"
 
-function BottomInput ({textProgress, setTextProgress, isEndLess, setIsEndLess, isFinished, setIsFinished, setTextToShow, mode}) {
+function BottomInput ({textProgress, setTextProgress, isEndLess, setIsEndLess, isFinished, setIsFinished, setTextToShow, setMode}) {
     const endNormalMode = (
         <div>
             <EndNormalButtons setTextToShow={setTextToShow} setTextProgress={setTextProgress} setIsFinished={setIsFinished}/>
@@ -13,7 +13,7 @@ function BottomInput ({textProgress, setTextProgress, isEndLess, setIsEndLess, i
                 setTextToShow={setTextToShow} 
                 setTextProgress={setTextProgress}
                 setIsFinished={setIsFinished} 
-                mode={mode}
+                setMode={setMode}
             />
         </div>
     )
@@ -25,7 +25,7 @@ function BottomInput ({textProgress, setTextProgress, isEndLess, setIsEndLess, i
                 setTextToShow={setTextToShow}
                 setTextProgress={setTextProgress} 
                 setIsFinished={setIsFinished}
-                mode={mode}
+                setMode={setMode}
             />
         </div>
     )

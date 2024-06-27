@@ -1,4 +1,4 @@
-function ModeSelection({isModeChosen, setisModeChosen, isEndLess, setIsEndLess }) {
+function ModeSelection({isModeChosen, setisModeChosen, isEndLess, setIsEndLess, setMode, mode }) {
     return(
         <div>
             <input 
@@ -7,8 +7,7 @@ function ModeSelection({isModeChosen, setisModeChosen, isEndLess, setIsEndLess }
                 acceskey = "n"
                 onClick = {() => {
                     setisModeChosen(true);
-                    //console.log(isEndLess)
-                    //console.log(isModeChosen)
+                    setMode("normal");
                 }}
                 
             />
@@ -20,8 +19,8 @@ function ModeSelection({isModeChosen, setisModeChosen, isEndLess, setIsEndLess }
                 onClick = {() => {
                     setisModeChosen(true);
                     setIsEndLess(true);
-                    //console.log(isEndLess);
-                    //console.log(isModeChosen);
+                    setMode("endless");
+
                 }}
             />
         </div>

@@ -4,11 +4,13 @@ import WordsToWrite from './WordsToWrite';
 import UserInput from './UserInput'
 import ModeSelection from './ModeSelection';
 import BottomInput from './BottomInput';
+import ModeDisplay from './ModeDisplay.js';
 
 function App() {
 
   //console.log("App is rendered")
   const [textToShow, setTextToShow] = useState("");
+  const [mode, setMode] = useState("");
   const [isModeChosen, setIsModeChosen] = useState(false);
   const [isEndLess, setIsEndLess] = useState(false)
   const [isFinished, setIsFinished] = useState(false) // condition to know if the user has finished to write the generated text
@@ -19,12 +21,15 @@ function App() {
       isModeChosen={isModeChosen} 
       setisModeChosen={setIsModeChosen} 
       isEndLess={isEndLess} 
-      setIsEndLess={setIsEndLess} 
+      setIsEndLess={setIsEndLess}
+      mode={mode}
+      setMode={setMode}
     />
   );
 
   const dactylo = (
     <div>
+      <ModeDisplay mode={mode}/>
       <WordsToWrite textToShow={textToShow} setTextToShow={setTextToShow} />
       <UserInput textToShow={textToShow} 
         isEndLess={isEndLess} 
@@ -41,6 +46,7 @@ function App() {
         isFinished={isFinished} 
         setTextToShow={setTextToShow} 
         setIsFinished={setIsFinished}
+        setMode={setMode}
       />
     </div>
   );

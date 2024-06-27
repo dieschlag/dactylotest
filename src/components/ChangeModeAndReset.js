@@ -1,6 +1,6 @@
 import GenerateText from "./GenerateText";
 
-function ChangeModeAndReset({isEndLess, setIsEndLess, setTextToShow, setTextProgress, setIsFinished}) {
+function ChangeModeAndReset({isEndLess, setIsEndLess, setTextToShow, setTextProgress, setIsFinished, setMode}) {
     
     
     
@@ -11,6 +11,9 @@ function ChangeModeAndReset({isEndLess, setIsEndLess, setTextToShow, setTextProg
         onClick={() => {
             if (isEndLess) {
                 setIsFinished(false)
+                setMode("normal");
+            } else {
+                setMode("endless");
             }
             setIsEndLess(!isEndLess);
             const fetchText = async () => {
